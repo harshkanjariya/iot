@@ -1,14 +1,16 @@
-import { useState } from "react";
-import { database, ref, set } from "./firebase";
+import {useState} from "react";
+import {database, ref, set} from "./firebase";
 import "./App.css";
 
 function App() {
   const [status, setStatus] = useState(false); // False = Off, True = On
+  const [ip, setIp] = useState("");
 
   // Function to update Firebase Realtime Database
   const toggleStatus = async () => {
     const newValue = status ? 0 : 1;
     try {
+      fetch("http://" + ip + "/control?state=" + newValue);
       await set(ref(database, "sensorValue/8"), newValue);
       setStatus(!status);
     } catch (error) {
@@ -18,6 +20,7 @@ function App() {
 
   return (
     <div className="App">
+      <input type="text" onChange={(e) => setIp(e.target.value)} value={ip}/>
       <button
         onClick={toggleStatus}
         style={{
