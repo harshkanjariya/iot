@@ -1,12 +1,13 @@
-import {useState} from "react";
-import {database, ref, set} from "./firebase";
+import { useState } from "react";
+import { database, ref, set } from "./firebase";
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import PrivacyPolicy from "./PrivacyPolicy";
 import "./App.css";
 
-function App() {
-  const [status, setStatus] = useState(false); // False = Off, True = On
+function ControlPage() {
+  const [status, setStatus] = useState(false);
   const [ip, setIp] = useState("");
 
-  // Function to update Firebase Realtime Database
   const toggleStatus = async () => {
     const newValue = status ? 0 : 1;
     try {
@@ -20,7 +21,7 @@ function App() {
 
   return (
     <div className="App">
-      <input type="text" onChange={(e) => setIp(e.target.value)} value={ip}/>
+      <input type="text" onChange={(e) => setIp(e.target.value)} value={ip} />
       <button
         onClick={toggleStatus}
         style={{
@@ -34,7 +35,21 @@ function App() {
       >
         {status ? "Turn Off" : "Turn On"}
       </button>
+      <div>
+        <Link to="/privacy-policy">Privacy Policy</Link>
+      </div>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<ControlPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      </Routes>
+    </Router>
   );
 }
 
