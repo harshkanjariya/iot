@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { database, ref, set } from "./firebase";
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import { HashRouter as Router, Route, Link, Routes } from "react-router-dom";
 import PrivacyPolicy from "./PrivacyPolicy";
 import "./App.css";
 
@@ -46,8 +46,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<ControlPage />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/iot" element={<ControlPage />} />
+        <Route path="/iot/privacy-policy" element={<PrivacyPolicy />} />
       </Routes>
     </Router>
   );
