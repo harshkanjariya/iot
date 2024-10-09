@@ -3,6 +3,7 @@ import { database, ref, set } from "./firebase";
 import { HashRouter as Router, Route, Link, Routes } from "react-router-dom";
 import PrivacyPolicy from "./PrivacyPolicy";
 import "./App.css";
+import TermsOfService from "./TermsOfService.tsx";
 
 function ControlPage() {
   const [status, setStatus] = useState(false);
@@ -46,8 +47,9 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/iot" element={<ControlPage />} />
-        <Route path="/iot/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/" element={<ControlPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
       </Routes>
     </Router>
   );
